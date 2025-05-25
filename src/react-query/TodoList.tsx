@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -9,6 +10,11 @@ interface Todo {
 }
 
 const TodoList = () => {
+  // useQuery({
+  //   // key is used to identify the cache
+  //   queryKey: ['todos'],
+  //   queryFn: 
+  // })
   const [todos, setTodos] = useState<Todo[]>([]);
   const [error, setError] = useState('');
 
