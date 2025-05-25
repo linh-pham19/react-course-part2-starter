@@ -6,7 +6,15 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import App from './App';
 import './index.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      cacheTime: 300000,
+      staleTime: 10000
+    }
+  }
+});
 ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 ).render(
