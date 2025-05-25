@@ -1,23 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import useTodos from '../routing/hooks/useTodos';
 
-interface Todo {
-  id: number;
-  title: string;
-  userId: number;
-  completed: boolean;
-}
+
 
 const TodoList = ()=> {
-  const fetchTodos = async (): Promise<Todo[]> => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/todos');
-    if (!res.ok) {
-      throw new Error(`Failed to fetch todos: ${res.statusText}`);
-    }
-    const data = await res.json();
-    return data as Todo[];
-  };
 
   // const fetchTodos = () => 
   //   axios
@@ -26,11 +12,7 @@ const TodoList = ()=> {
   //      res.data);
   // query gets back an object with properties like data, error, isLoading, etc.
   // we get autore fetch, auto retry and caching
-  const {data: todos, error} = useQuery<Todo[], Error>({
-    // key is used to identify the cache internally
-    queryKey: ['todos'],
-    queryFn: fetchTodos,
-  })
+  const {data: todos, error, isLoading} = useTodos();
 
   // const [todos, setTodos] = useState<Todo[]>([]);
   // const [error, setError] = useState('');
@@ -42,7 +24,8 @@ const TodoList = ()=> {
   //     .catch((error) => setError(error));
   // }, []);
 
-  if (error) return <p>{error.message}</p>;
+  if (isLoading) return <p>Loading...</p>;
+  if (error?.message) return <p>{error.message}</p>;
 
   return (
     <ul className="list-group">
