@@ -6,7 +6,7 @@ interface Post {
     body: string;
 }
 
-const usePosts = (userId: number | undefined) => {
+const usePosts = (userId: number | undefined, page: number) => {
           const fetchPosts = async (): Promise<Post[]> => {
             const url = new URL('https://jsonplaceholder.typicode.com/posts')
 
@@ -14,6 +14,10 @@ const usePosts = (userId: number | undefined) => {
             if (userId !== undefined) {
                 url.searchParams.append('userId', userId.toString());
             }
+
+            // pagination
+            url.searchParams.append('_page', page.toString());
+            url.searchParams.append('_limit', '10'); // Limit to 10 posts per page
 
             const res = await fetch(url.toString());
 
@@ -27,8 +31,10 @@ const usePosts = (userId: number | undefined) => {
           };
     
           return useQuery<Post[], Error>({
-            queryKey:userId? ['users',userId,'posts'] : ['posts'],
+            // need to take out
+            queryKey:['users',userId,'posts', page],
             queryFn: fetchPosts,
+            keepPreviousData: true, // Keep previous data while fetching new data
           })
 }
 

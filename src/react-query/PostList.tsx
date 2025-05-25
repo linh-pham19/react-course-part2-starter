@@ -1,19 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import usePosts from '../routing/hooks/usePosts';
 
 
 const PostList = () => {
 const [userId, setUserId] = useState<number>();
-const {data: posts, error, isLoading} = usePosts(userId);
-if (isLoading) return <p>Loading...</p>;
+const [page, setPage] = useState(1);
+const {data: posts, error, isLoading} = usePosts(userId, page);
+if (isLoading) return <p>Loading...</p>
 if (error) return <p>{error.message}</p>;
 
   return (
     <>
     <select
-      onChange={(event) => setUserId(parseInt(event.target.value))}
+      onChange={(event) => {
+        setUserId(parseInt(event.target.value));
+        setPage(1); // Reset to the first page when user changes
+      }
+      }
       value={userId}
      className='form-select mb-3'>
       <option value="">Select a post</option>
@@ -28,6 +31,24 @@ if (error) return <p>{error.message}</p>;
         </li>
       ))}
     </ul>
+
+    <div className="d-flex justify-content-between mt-3">
+        <button
+          className="btn btn-primary"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <span>Page {page}</span>
+        <button
+          className="btn btn-primary"
+          onClick={() => setPage((prev) => prev + 1)}
+          disabled={posts?.length === 0} // Disable if no more posts
+        >
+          Next
+        </button>
+      </div>
     </>
   
   );
