@@ -8,7 +8,10 @@ const [page, setPage] = useState(1);
 const {data: posts, error, isLoading} = usePosts(userId, page);
 if (isLoading) return <p>Loading...</p>
 if (error) return <p>{error.message}</p>;
+console.log("data.length", posts.length)
+console.log("page,page)", page)
 
+const POSTS_PER_PAGE = 10; // Same as the _limit in the API request
   return (
     <>
     <select
@@ -44,7 +47,7 @@ if (error) return <p>{error.message}</p>;
         <button
           className="btn btn-primary"
           onClick={() => setPage((prev) => prev + 1)}
-          disabled={posts?.length === 0} // Disable if no more posts
+          disabled={ (posts?.length ?? 0) < POSTS_PER_PAGE} // Disable if no more posts
         >
           Next
         </button>

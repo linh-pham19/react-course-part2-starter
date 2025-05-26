@@ -22,11 +22,11 @@ const usePosts = (userId: number | undefined, page: number) => {
             const res = await fetch(url.toString());
 
             if (!res.ok) {
-              console.log("failed")
+            //   console.log("failed")
               throw new Error(`Failed to fetch todos: ${res.statusText}`);
             }
             const data = await res.json();
-            console.log(data)
+            // console.log(data)
             return data as Post[];
           };
     
@@ -34,7 +34,7 @@ const usePosts = (userId: number | undefined, page: number) => {
             // need to take out
             queryKey:['users',userId,'posts', page],
             queryFn: fetchPosts,
-            keepPreviousData: true, // Keep previous data while fetching new data
+            // keepPreviousData: true, // Keep previous data while fetching new data
           })
 }
 
