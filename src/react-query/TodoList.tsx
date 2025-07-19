@@ -1,18 +1,24 @@
-import { useQuery } from '@tanstack/react-query';
-import useTodos from '../routing/hooks/useTodos';
+import useTodos from "../routing/hooks/useTodos";
 
+const TodoList = () => {
+  // return a promise of type any
+  // const fetchTodos = () =>
+  //   axios
+  //     .get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
+  //     .then((res) => res.data);
 
-
-const TodoList = ()=> {
-
-  // const fetchTodos = () => 
+  // useQuery({
+  //   queryKey: ["todos"],
+  //   queryFn: fetchTodos,
+  // });
+  // const fetchTodos = () =>
   //   axios
   //     .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-  //     .then((res) => 
+  //     .then((res) =>
   //      res.data);
   // query gets back an object with properties like data, error, isLoading, etc.
   // we get autore fetch, auto retry and caching
-  const {data: todos, error, isLoading} = useTodos();
+  const { data: todos, error, isLoading } = useTodos();
 
   // const [todos, setTodos] = useState<Todo[]>([]);
   // const [error, setError] = useState('');
