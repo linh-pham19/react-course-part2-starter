@@ -1,15 +1,8 @@
-import { useReducer } from "react";
 import "./App.css";
-import Counter from "./state-management/Counter";
-import LoginStatus from "./state-management/auth/LoginStatus";
-import TaskList from "./state-management/TaskList";
-import tasksReducer from "./state-management/reducers/tasksReducer";
-import TasksContext from "./state-management/context/tasksContext";
-import NavBar from "./state-management/NavBar";
-import loginReducer from "./state-management/auth/LoginReducer";
-import LoginContext from "./state-management/auth/loginContext";
 import LoginProvider from "./state-management/auth/LoginProvider";
-import TaskProvider from "./state-management/TaskProvider";
+import NavBar from "./state-management/NavBar";
+import TaskList from "./state-management/task/TaskList";
+import TaskProvider from "./state-management/task/TaskProvider";
 
 function App() {
   // lifting state up

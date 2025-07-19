@@ -1,4 +1,4 @@
-import { Task } from "../reducers/tasksReducer";
+
 
 // this is the type of tyhe context (the truck that carries the state and dispatch function)
 interface TasksContextType {
@@ -9,6 +9,7 @@ interface TasksContextType {
 
 // create the context with a default value
 import { createContext } from "react";
+import { Task } from "./TaskProvider";
 const TasksContext = createContext<TasksContextType>({} as TasksContextType);
 
 export default TasksContext;

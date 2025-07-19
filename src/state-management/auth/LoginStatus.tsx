@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import LoginContext from "./loginContext";
-import { Action } from "./LoginReducer";
+import { Action } from "./LoginProvider";
+import useLogin from "./useLogin";
 
-const useLogin = () => useContext(LoginContext);
 interface LoginContextType {
   user: string;
   dispatch: React.Dispatch<Action>;
