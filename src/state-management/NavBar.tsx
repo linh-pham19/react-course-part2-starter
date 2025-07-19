@@ -4,6 +4,7 @@ import TasksContext from "./task/tasksContext";
 import LoginContext from "./auth/loginContext";
 import useTasks from "./task/useTasks";
 import useLogin from "./auth/useLogin";
+import useCounterStore from "./counter/store";
 
 const NavBar = () => {
   // THESE ARE FOR USING CONTEXT
@@ -13,9 +14,12 @@ const NavBar = () => {
   // THESE ARE FOR USING CUSTOM HOOKS
   const { tasks } = useTasks();
   const { user } = useLogin();
+  const counter = useCounterStore((s) => s.counter);
+  console.log("Navbar");
   return (
     <>
-      <p>{user}</p>
+      <p>User: {user}</p>
+      <p>Counter: {counter}</p>
       <nav className="navbar d-flex justify-content-between">
         <span className="badge text-bg-secondary">{tasks.length}</span>
         <LoginStatus />

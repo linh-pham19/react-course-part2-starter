@@ -1,3 +1,4 @@
+import useLoginStore from "../auth/store";
 import useTasks from "./useTasks";
 
 const TaskList = () => {
@@ -12,8 +13,12 @@ const TaskList = () => {
   // THIS IS FOR USING CUSTOM HOOK
   const { tasks, dispatch } = useTasks();
 
+  // THIS IS FOR USING ZUSTAND
+  const { username } = useLoginStore();
+
   return (
     <>
+      <p>({username})</p>
       <button
         onClick={() =>
           // setTasks([
